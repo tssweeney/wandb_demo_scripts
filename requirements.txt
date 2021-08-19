@@ -1,0 +1,5 @@
+git+https://github.com/wandb/client@feature/wandb-launch#egg=wandb
+keras
+tensorflow
+sklearn
+numpy
