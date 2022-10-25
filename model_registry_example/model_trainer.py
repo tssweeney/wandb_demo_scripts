@@ -7,7 +7,7 @@ import wandb
 import util
 import argparse
 
-project             = "model_registry_example"
+project             = "hackweek_2022"
 model_use_case_id   = "mnist"
 job_type            = "model_trainer"
 
@@ -17,7 +17,7 @@ parser.add_argument('--batch_size',         type=int,   default=128)
 parser.add_argument('--epochs',             type=int,   default=5)
 parser.add_argument('--optimizer',          type=str,   default="adam")
 parser.add_argument('--validation_split',   type=float, default=0.1)
-parser.add_argument('--training_data',      type=str,   default="wandb-artifact://auto-driver/model_registry_example/mnist_ds:latest")
+parser.add_argument('--training_data',      type=str,   default="wandb-artifact://timssweeney/hackweek_2022/mnist_ds:latest")
 run = wandb.init(project=project, job_type=job_type, config=parser.parse_args(), settings=wandb.Settings(enable_job_creation=True))
 
 # Next we download the latest training data available for this use case from WandB. 
