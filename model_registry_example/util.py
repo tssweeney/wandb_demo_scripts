@@ -38,8 +38,9 @@ def publish_dataset_to_wb(x_train, y_train, x_eval, y_eval, model_use_case_id="m
     artifact.save()
     print("::util.publish_dataset_to_wb:: Published data to Artifact {}".format(name))
 
-def download_training_dataset_from_wb(model_use_case_id="mnist", version="latest"):
-    name = "{}:{}".format("{}_ds".format(model_use_case_id), version)
+# def download_training_dataset_from_wb(model_use_case_id="mnist", version="latest"):
+def download_training_dataset_from_wb(name):
+    # name = "{}:{}".format("{}_ds".format(model_use_case_id), version)
     artifact = wandb.run.use_artifact(name)
     print("::util.download_training_dataset_from_wb:: Downlaoding Artifact {}".format(artifact.name))
     train_table = artifact.get("train_table")
