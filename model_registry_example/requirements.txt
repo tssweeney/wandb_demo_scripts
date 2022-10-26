@@ -1,5 +1,6 @@
-wandb
+git+https://github.com/wandb/wandb.git@hackweek_2022/workflows#egg=wandb
 keras
 tensorflow
 sklearn
 numpy
+pillow

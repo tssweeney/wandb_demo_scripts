@@ -88,6 +88,9 @@ def publish_model_candidate_to_wb(model, model_use_case_id):
     model.save(path)
     artifact.add_file(path, "model.h5")
     artifact.save()
+    print("LINKING")
+    wandb.run.link_artifact(artifact, "hack2022-model")
+    # wandb.Api().create_run
 
 def download_eval_dataset_from_wb(model_use_case_id="mnist", version="latest"):
     artifact = wandb.run.use_artifact("{}:{}".format("{}_ds".format(model_use_case_id), version))
