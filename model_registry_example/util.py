@@ -76,7 +76,8 @@ def build_and_train_model(x_train, y_train, config):
     x_t, x_v, y_t, y_v = train_test_split(x_train, y_train, test_size=0.33)
     model.fit(x_t, y_t, batch_size=batch_size, epochs=epochs, validation_data=(x_v, y_v), callbacks=[WandbCallback(
         log_weights=True,
-        log_evaluation=True
+        log_evaluation=True,
+        save_model=False
     )])
     return model
 
@@ -87,10 +88,7 @@ def publish_model_candidate_to_wb(model, model_use_case_id):
     path = "{}.h5".format(np.random.randint(1e5))
     model.save(path)
     artifact.add_file(path, "model.h5")
-    artifact.save()
-    print("LINKING")
-    wandb.run.link_artifact(artifact, "hack2022-model")
-    # wandb.Api().create_run
+    return wandb.run.log_artifact(artifact)
 
 def download_eval_dataset_from_wb(model_use_case_id="mnist", version="latest"):
     artifact = wandb.run.use_artifact("{}:{}".format("{}_ds".format(model_use_case_id), version))
