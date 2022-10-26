@@ -9,7 +9,8 @@ import wandb
 import util
 import argparse
 
-project             = "model_registry_example"
+entity              = "timssweeney"
+project             = "hackweek_2022_post_kyle"
 model_use_case_id   = "mnist"
 job_type            = "evaluator"
 
@@ -17,7 +18,7 @@ settings = wandb.Settings(enable_job_creation=True)
 
 # First, we launch a run which registers this workload with WandB.
 run = wandb.init(entity="auto-driver", project=project, job_type=job_type, settings=settings, config={
-    "model_artifact": "wandb-artifact://auto-driver/model_registry_example/mnist_model_candidates:latest"
+    "model_artifact": f"wandb-artifact://{entity}/{project}/{model_use_case_id}_candidates:latest"
 })
 
 # Then we fetch the latest evaluation set.

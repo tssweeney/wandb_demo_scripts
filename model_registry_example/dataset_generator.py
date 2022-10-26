@@ -7,7 +7,8 @@ import wandb
 import util
 import argparse
 
-project             = "model_registry_example"
+entity              = "timssweeney"
+project             = "hackweek_2022_post_kyle"
 model_use_case_id   = "mnist"
 job_type            = "dataset_builder"
 

@@ -82,16 +82,12 @@ def build_and_train_model(x_train, y_train, config):
     return model
 
 def publish_model_candidate_to_wb(model, model_use_case_id):
-    name = "{}_model_candidates-{}".format(model_use_case_id, wandb.run.name)
+    name = "{}-{}_model".format(wandb.run.name, model_use_case_id)
     print("::util.publish_model_candidate_to_wb:: Publishing model version to Artifact {}".format(name))
     artifact = wandb.Artifact(name, "model")
     path = "{}.h5".format(np.random.randint(1e5))
     model.save(path)
     artifact.add_file(path, "model.h5")
-    # artifact.save()
-    # print("LINKING")
-    # wandb.run.link_artifact(artifact, "hack2022-model")
-    # wandb.Api().create_run
     return wandb.run.log_artifact(artifact)
 
 def download_eval_dataset_from_wb(model_use_case_id="mnist", version="latest"):

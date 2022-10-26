@@ -7,7 +7,8 @@ import wandb
 import util
 import argparse
 
-project             = "model_registry_example"
+entity              = "timssweeney"
+project             = "hackweek_2022_post_kyle"
 model_use_case_id   = "mnist"
 job_type            = "model_trainer"
 
@@ -17,7 +18,7 @@ parser.add_argument('--batch_size',         type=int,   default=128)
 parser.add_argument('--epochs',             type=int,   default=2)
 parser.add_argument('--optimizer',          type=str,   default="adam")
 parser.add_argument('--validation_split',   type=float, default=0.1)
-parser.add_argument('--training_data',      type=str,   default="wandb-artifact://auto-driver/model_registry_example/mnist_ds:latest")
+parser.add_argument('--training_data',      type=str,   default=f"wandb-artifact://{entity}/{project}/{model_use_case_id}_ds:latest")
 
 run = wandb.init(project=project, job_type=job_type, config=parser.parse_args(), settings=wandb.Settings(enable_job_creation=True))
 
@@ -33,6 +34,6 @@ model = util.build_and_train_model(x_train, y_train, config=run.config)
 art = util.publish_model_candidate_to_wb(model, model_use_case_id)
 
 # TODO: link model to candidates
-run.link_artifact(art, "auto-driver/model-registry/Candidates")
+run.link_artifact(art, f"{entity}/{project}/{model_use_case_id}_candidates")
 
 run.finish()
