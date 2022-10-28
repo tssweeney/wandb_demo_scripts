@@ -52,10 +52,13 @@ if (
             "artifactCollectionName": f"{model_use_case_id}_candidates",
         }
     )
+    current_production = model
 
 util.save_metric_to_model_in_wb(model, metric, score)
 
 # # TODO: link model to challengers
-# run.link_artifact(model, "auto-driver/model-registry/Challengers")
+run.link_artifact(
+    current_production, f"{entity}/{project}/Production-{model_use_case_id}"
+)
 
 run.finish()
