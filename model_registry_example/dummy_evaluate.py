@@ -13,7 +13,7 @@ def func():
     for _ in range(5):
         run.log({random_string: random.random()})
 
-    run.log_code()
+    # run.log_code()
     run.finish()
 
 
