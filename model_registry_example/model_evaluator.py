@@ -40,7 +40,7 @@ model = run.config["model_artifact"]
 score = util.evaluate_model(model, x_eval, y_eval)
 
 current_production = wandb.use_artifact(
-    "{entity}/{project}/{model_use_case_id}_candidates:production"
+    f"{entity}/{project}/{model_use_case_id}_candidates:production"
 )
 if score < current_production.metadata[metric] or "demo" in current_production.aliases:
     model.aliases.append("production")
