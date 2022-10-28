@@ -42,7 +42,10 @@ score = util.evaluate_model(model, x_eval, y_eval)
 current_production = wandb.use_artifact(
     f"{entity}/{project}/{model_use_case_id}_candidates:production"
 )
-if score < current_production.metadata[metric] or "demo" in current_production.aliases:
+if (
+    score < current_production.metadata.get(metric, float("inf"))
+    or "demo" in current_production.aliases
+):
     model.aliases.append("production")
 
 util.save_metric_to_model_in_wb(model, metric, score)
