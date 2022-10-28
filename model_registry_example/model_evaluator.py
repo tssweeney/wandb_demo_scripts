@@ -18,7 +18,7 @@ settings = wandb.Settings(enable_job_creation=True)
 
 # First, we launch a run which registers this workload with WandB.
 run = wandb.init(
-    entity=entity,
+    # entity=entity,
     project=project,
     job_type=job_type,
     settings=settings,
