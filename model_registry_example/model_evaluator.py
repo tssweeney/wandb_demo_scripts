@@ -46,7 +46,12 @@ if (
     score < current_production.metadata.get(metric, float("inf"))
     or "demo" in current_production.aliases
 ):
-    model.aliases.append("production")
+    model._better_aliases.append(
+        {
+            "alias": "production",
+            "artifactCollectionName": f"{model_use_case_id}_candidates",
+        }
+    )
 
 util.save_metric_to_model_in_wb(model, metric, score)
 
